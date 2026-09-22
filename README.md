@@ -29,6 +29,7 @@ mealcue/
 
 - Node.js 24
 - npm 11
+- Docker with Docker Compose
 
 ## Getting started
 
@@ -36,6 +37,16 @@ Install dependencies from the repository root:
 
 ```bash
 npm install
+```
+
+Create the local server environment file:
+
+```bash
+cp server/.env.example server/.env
+```
+Start MongoDB:
+```bash
+rpm run db:up
 ```
 
 Start the client and server together:
@@ -49,6 +60,7 @@ The applications run at:
 - Client: http://localhost:5173
 - API: http://localhost:3000
 - Health check: http://localhost:3000/api/health
+- MongoDB: mongodb://127.0.0.1:27017/mealcue
 
 ## Available commands
 
@@ -66,4 +78,25 @@ Individual development servers can also be started with:
 ```bash
 npm run dev:client
 npm run dev:server
+```
+
+Database commands:
+
+```bash
+npm run db:up
+npm run db:down
+npm run db:logs
+```
+
+Workflow:
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+npm run db:down
+npm run db:up
+docker compose ps
+git diff -check
+git status --short
 ```
