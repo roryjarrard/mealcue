@@ -1,14 +1,26 @@
 import express from "express";
+import { connectToDatabase } from "./config/database.js";
+import { env } from "./config/env.js";
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok" });
+  res.json({ status: "ok", database: "connected" });
 });
 
-app.listen(PORT, () => {
-  console.log(`MealCue server listening on http://localhost:${PORT}`);
-});
+async function startServer(): Promise<void> {
+  try {
+    await connectToDatabase();
+
+    app.listen(env.port, () => {
+      console.log(`MealCue server listening on http://localhost:${env.port}`);
+    });
+  } catch (err) {
+    console.error("Failed to start MealCue server:", err);
+    process.exit(1);
+  }
+}
+
+void startServer();
