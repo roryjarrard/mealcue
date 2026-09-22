@@ -1,0 +1,27 @@
+{
+  "name": "mealcue",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "concurrently --names client,server --prefix-colors cyan,green \"npm run dev --workspace client\" \"npm run dev --workspace server\"",
+    "dev:client": "npm run dev --workspace client",
+    "dev:server": "npm run dev --workspace server",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Rory Jarrard",
+    "email": "roryjarrard@gmail.com"
+  },
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
