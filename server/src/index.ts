@@ -1,14 +1,6 @@
-import express from "express";
+import { app } from "./app.js";
 import { connectToDatabase } from "./config/database.js";
 import { env } from "./config/env.js";
-
-const app = express();
-
-app.use(express.json());
-
-app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", database: "connected" });
-});
 
 async function startServer(): Promise<void> {
   try {
